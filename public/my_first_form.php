@@ -1,3 +1,13 @@
+<?php
+
+echo "<p>GET:</p>";
+var_dump($_GET);
+
+echo "<p>POST:</p>";
+var_dump($_POST);
+
+?>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>My First HTML Form</title>
@@ -5,7 +15,7 @@
 <body>
     <h1>This site shows form examples<hr></h1>
     <h2>User Login</h2>
-	<form method="GET" action="http://requestb.in/16cq6ur1">
+	<form method="POST" action="">
         <p>
             <label for="username">Username</label>
             <input id="username" name="username" type="text" placeholder="Enter Username">
@@ -19,7 +29,7 @@
         </p>
     </form>
     <h2>Compose E-mail</h2>
-    <form method="GET" action="http://requestb.in/16cq6ur1">
+    <form method="POST" action="">
         <p>
             <label for="emailto">To</label>
             <input id="emailto" name="emailto" type="text" placeholder="Enter Recievers E-mail">
@@ -47,7 +57,7 @@
         </p>
     </form>
     <h2>Multiple Choice Test</h2>
-    <form>
+    <form method="POST" action="">
         <p>Question 1: What are the Stark's Words?</p>
             <label for="q1a">
                 <input type="radio" id="q1a" name="q1" value="A Lannister always pays his debts.">A Lannister always pays his debts.
@@ -74,7 +84,7 @@
             <label for="q2d">
                 <input type="radio" id="q2d" name="q2" value="Varys">Varys
             </label>
-        <p>Question 3: Who is the best player of the Game of Thrones</p>
+        <p>Question 3: Who is(are) the best player(s) of the Game of Thrones</p>
             <label for="q3a">
                 <input type="checkbox" id="q3a" name="q3[]" value="Jon Snow">Jon Snow
             </label>
@@ -87,5 +97,29 @@
             <label for="q3d">
                 <input type="checkbox" id="q3d" name="q3[]" value="Varys">Varys
             </label>
+        <p>Question 4: Which character(s) would you most like to see killed off</p>
+            <label for="q4">
+                <select id="q4" name="q4[]" multiple>
+                    <option value="Joffrey Baratheon">Joffrey Baratheon</option>
+                    <option value="Daenerys Targaryen">Daenerys Targaryen</option>
+                    <option value="Stannis Baratheon">Stannis Baratheon</option>
+                    <option value="The Hound">The Hound</option>
+                </select>
+        <p>    
+            <input type="submit">   
+        </p>
+        </form>
+    <h2>Select Testing</h2>
+    <form method="GET" action="">
+        <p>Do you <strong>LOVE</strong> Game of Thrones?</p>
+            <label for="yesno">well... do you?</label>
+            <select id="yesno" name="yesno"> 
+                <option value="0">no.</option>
+                <option selected value="1">YES!</option>
+            </select>
+        <p>    
+            <input type="submit">
+        </p>
+    </form>
 </body>
 </html>
