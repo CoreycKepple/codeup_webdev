@@ -17,13 +17,13 @@ var_dump($_POST);
 	<ul>
 		<li>Wake Up</li>
 		<li>Eat Breakfast</li>
-		<li>Go to Codeup</li>
+		<li>Go to CodeUp</li>
 		<li>Profit</li>
 	</ul>
 	<h2>Add items to list</h2>
 	<form method="GET" action="">
 		<p>
-		<label for="additem">Add Item to list:</label>
+		<label for="additem">Item to add:</label>
 			<input id="additem" name="additem" type="text" placeholder="Enter new TODO item">
 		</p>
 		<p>
