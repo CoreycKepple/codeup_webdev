@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Break-Continue-JS</title>
+</head>
+<body>
+<script type="text/javascript">
+var random=Math.floor((Math.random()*50)+1)
+console.log("Your random number is: "+random);
+for (var i = 0; i <= 50; i++) {
+	if (i%2==0) {
+		continue;
+	}
+	if (i==random) {
+	console.log("This is your random number: "+i);
+	}else {
+		console.log("This number is odd: "+i);
+	}
+
+
+}
+</script>
+</body>
+</html>
