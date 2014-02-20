@@ -4,8 +4,12 @@
 </head>
 <body>
 <script type="text/javascript">
+do {
 var random=Math.floor((Math.random()*50)+1)
+}while (random%2==0);
+
 console.log("Your random number is: "+random);
+
 for (var i = 0; i <= 50; i++) {
 	if (i%2==0) {
 		continue;
