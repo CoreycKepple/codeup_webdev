@@ -7,14 +7,14 @@
 
 // todo: Ask the user for their name.
 //       Keep asking if an empty input is provided.
-var name = prompt('What is your name?: ');
+var username = prompt('What is your name?: ');
 
-while (name==='null' || name=='' ) {
-	name = prompt('What is your name?: ');
+while (username===null || username=='' ) {
+	username = prompt('What is your name?: ');
 }
 
 // todo: Show an alert message that welcomes the user based on their input.
-alert("Hello "+name+" welcome to the site!")
+alert("Hello "+username+" welcome to the site!")
 
 // todo: Ask the user if they like pizza.
 //       Based on their answer tell show a creative alert message.
