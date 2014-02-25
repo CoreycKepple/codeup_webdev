@@ -24,8 +24,8 @@ if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 		$newfile = basename($_FILES['add_file']['name']);
 		$saved_filename = $upload_dir . $newfile;
 		move_uploaded_file($_FILES['add_file']['tmp_name'], $saved_filename);
-		$handle = fopen("uploads/{$newfile}", 'r');
-		$contents = fread($handle, filesize("uploads/{$newfile}"));
+		$handle = fopen($saved_filename, 'r');
+		$contents = fread($handle, filesize($saved_filename));
 		$newlist = explode("\n", $contents);
 		$list = array_merge($list,$newlist);
 		$strfile = implode("\n", $list);
@@ -66,17 +66,15 @@ if (!empty($_POST['additem'])) {
 <body>
 	<h1>TODO list:</h1>
 		<form method ="GET" action ="">
-			<ul>
-				<?php			
-				if(!empty($list)){
-					foreach ($list as $key => $item) {
-						echo "<li>{$item} | <a href='?remove={$key}' name='remove' id='remove'>Remove Item</a></li>";
-					}
-				}else {
-					echo "<h3>You have nothing to do? Find something :</h3>";
-					echo "<p><a href='http://google.com'> :-)</a></p>";
-				}
-				?>
+			<ul>	
+				<?if(!empty($list)) : ?>
+					<?foreach ($list as $key => $item) : ?>
+					<li><?=	"{$item} | <a href='?remove={$key}' name='remove' id='remove'>Remove Item</a>"; ?></li>
+					<? endforeach; ?>
+				<? else : ?>
+					<h3><?= "You have nothing to do? Find something :";?></h3>
+					<p><?= "<a href='http://google.com'> :-)</a>";?></p>
+				<? endif; ?>
 			</ul>
 		</form>
 	<h2>Add items to list</h2>
