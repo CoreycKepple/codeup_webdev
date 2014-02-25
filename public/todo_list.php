@@ -1,9 +1,10 @@
 <!DOCTYPE HTML!>
 <?php
 $filename = 'data/codeup_todo.txt';
-$handle = fopen($filename, 'r');
 $filesize = filesize($filename);
+
 if ($filesize != 0) {
+	$handle = fopen($filename, 'r');
 	$contents = fread($handle,$filesize );
 	fclose($handle);
 	$list = array();
@@ -27,17 +28,15 @@ if (isset($_GET['remove'])) {
 	exit(0);
 }
 if (!empty($_POST['additem'])) {
-				$new = implode($_POST, '');
-				array_push($list, $new);
-	            $string=implode("\n", $list);
-				$handle=fopen($filename, 'w');
-	            fwrite($handle, $string);
-	            fclose($handle);
-	            header("Location: todo_list.php");
-				}
+	$new = implode($_POST, '');
+	array_push($list, $new);
+	$string=implode("\n", $list);
+	$handle=fopen($filename, 'w');
+	fwrite($handle, $string);
+	fclose($handle);
+	header("Location: todo_list.php");
+}
 ?>
-
-
 <html>
 <head>
 	<title>TODO List</title>
@@ -48,31 +47,26 @@ if (!empty($_POST['additem'])) {
 			<ul>
 				<?php			
 				if(!empty($list)){
-				foreach ($list as $key => $item) {
-					echo "<li>{$item}
-					<a href='?remove={$key}' name='remove' id='remove'>Remove Item</a></li>";
+					foreach ($list as $key => $item) {
+						echo "<li>{$item}
+						<a href='?remove={$key}' name='remove' id='remove'>Remove Item</a></li>";
 					}
 				}else {
 					echo "<h3>You have nothing to do? Find something :</h3>";
 					echo "<p><a href='http://google.com'> :-)</a></p>";
 				}
-				
 				?>
 			</ul>
 		</form>
 	<h2>Add items to list</h2>
 		<form method="POST" action="">
 			<p>
-			<label for="additem">Item to add:</label>
+				<label for="additem">Item to add:</label>
 				<input id="additem" name="additem" type="text" placeholder="Enter new TODO item">
 			</p>
 			<p>
 				<input type="submit">
 			</p>
-			<?php
-			
-			?>
-			
 		</form>
 </body>
 </html>
