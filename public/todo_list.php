@@ -26,6 +26,15 @@ if (isset($_GET['remove'])) {
 	header("Location: todo_list.php");
 	exit(0);
 }
+if (!empty($_POST['additem'])) {
+				$new = implode($_POST, '');
+				array_push($list, $new);
+	            $string=implode("\n", $list);
+				$handle=fopen($filename, 'w');
+	            fwrite($handle, $string);
+	            fclose($handle);
+	            header("Location: todo_list.php");
+				}
 ?>
 
 
@@ -61,15 +70,7 @@ if (isset($_GET['remove'])) {
 				<input type="submit">
 			</p>
 			<?php
-			if (!empty($_POST['additem'])) {
-				$new = implode($_POST, '');
-				array_push($list, $new);
-	            $string=implode("\n", $list);
-				$handle=fopen($filename, 'w');
-	            fwrite($handle, $string);
-	            fclose($handle);
-	            header("Location: todo_list.php");
-				}
+			
 			?>
 			
 		</form>
