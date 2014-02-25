@@ -27,13 +27,22 @@ if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 		$handle = fopen($saved_filename, 'r');
 		$contents = fread($handle, filesize($saved_filename));
 		$newlist = explode("\n", $contents);
-		$list = array_merge($list,$newlist);
-		$strfile = implode("\n", $list);
-		$handle = fopen($filename, 'w');
-		fwrite($handle, $strfile);
-		fclose($handle);
-		header("Location: todo_list.php");
-		exit(0);
+		if ($_POST['overwrite'] == TRUE) {
+			$strfile = implode("\n", $newlist);
+			$handle = fopen($filename, 'w');
+			fwrite($handle, $strfile);
+			fclose($handle);
+			header("Location: todo_list.php");
+			exit(0);
+		}else {
+			$list = array_merge($list,$newlist);
+			$strfile = implode("\n", $list);
+			$handle = fopen($filename, 'w');
+			fwrite($handle, $strfile);
+			fclose($handle);
+			header("Location: todo_list.php");
+			exit(0);
+		}
 	}else {
 		echo "<p> File is not plain/text ~~ please upload a different file.</p>";
 	}
@@ -86,6 +95,10 @@ if (!empty($_POST['additem'])) {
 			<p>
 				<label for="add_file">Upload list:</label>
 				<input id="add_file" name="add_file" type="file">
+			</p>
+			<p>
+				<label for="overwrite">Overwrite current list with new list?:</label>
+				<input id="overwrite" name="overwrite" type="checkbox">
 			</p>
 			<p>
 				<input type="submit" value="Add">
