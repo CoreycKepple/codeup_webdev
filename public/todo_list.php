@@ -2,7 +2,19 @@
 <?php
 $filename = 'data/codeup_todo.txt';
 $filesize = filesize($filename);
-	
+$arcfile = 'data/archive.txt';
+$arcsize = filesize($arcfile);
+$archive = [];
+$archiveitem = 0;	
+
+
+function save_file($string,$filename) {
+	$handle=fopen($filename, 'w');
+	fwrite($handle, $string);
+	fclose($handle);
+	header("Location: todo_list.php");
+	exit(0);
+}
 
 if ($filesize != 0) {
 	$handle = fopen($filename, 'r');
@@ -29,19 +41,12 @@ if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 		$newlist = explode("\n", $contents);
 		if ($_POST['overwrite'] == TRUE) {
 			$strfile = implode("\n", $newlist);
-			$handle = fopen($filename, 'w');
-			fwrite($handle, $strfile);
-			fclose($handle);
-			header("Location: todo_list.php");
-			exit(0);
+			save_file($strfile,$filename);
+			
 		}else {
 			$list = array_merge($list,$newlist);
 			$strfile = implode("\n", $list);
-			$handle = fopen($filename, 'w');
-			fwrite($handle, $strfile);
-			fclose($handle);
-			header("Location: todo_list.php");
-			exit(0);
+			save_file($strfile,$filename);
 		}
 	}else {
 		echo "<p> File is not plain/text ~~ please upload a different file.</p>";
@@ -50,22 +55,24 @@ if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 }
 if (isset($_GET['remove'])) {
 	$key = $_GET['remove'];
+	$archiveitem = ($list[$key]);
 	unset($list[$key]);
 	$str = implode("\n", $list);
 	$handle = fopen($filename, 'w');
 	fwrite($handle, $str);
 	fclose($handle);
+	$archandle = fopen($arcfile, 'a');
+	$addarc = PHP_EOL.$archiveitem;
+	fwrite($archandle, $addarc);
+	fclose($archandle);
 	header("Location: todo_list.php");
 	exit(0);
 }
 if (!empty($_POST['additem'])) {
-	$new = implode($_POST, '');
+	$new = implode($_POST);
 	array_push($list, $new);
 	$string=implode("\n", $list);
-	$handle=fopen($filename, 'w');
-	fwrite($handle, $string);
-	fclose($handle);
-	header("Location: todo_list.php");
+	save_file($string,$filename);
 }
 ?>
 <html>
@@ -78,6 +85,7 @@ if (!empty($_POST['additem'])) {
 			<ul>	
 				<?if(!empty($list)) : ?>
 					<?foreach ($list as $key => $item) : ?>
+					<? $item = htmlspecialchars(strip_tags($item)); ?>
 					<li><?=	"{$item} | <a href='?remove={$key}' name='remove' id='remove'>Remove Item</a>"; ?></li>
 					<? endforeach; ?>
 				<? else : ?>
@@ -97,12 +105,16 @@ if (!empty($_POST['additem'])) {
 				<input id="add_file" name="add_file" type="file">
 			</p>
 			<p>
-				<label for="overwrite">Overwrite current list with new list?:</label>
+				<label for="overwrite">Overwrite current list with uploaded list?:</label>
 				<input id="overwrite" name="overwrite" type="checkbox">
 			</p>
 			<p>
 				<input type="submit" value="Add">
 			</p>
 		</form>
+	<h2>View archive of completed Items:</h2>
+		<p>
+			<a href="/data/archive.txt">Completed Items</a>
+		</p>
 </body>
 </html>
