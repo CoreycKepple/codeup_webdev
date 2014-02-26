@@ -1,4 +1,4 @@
 learn php
 learn javascript
 learn HTML
-learn javascript
+learn CSS

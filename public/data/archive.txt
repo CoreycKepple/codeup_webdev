@@ -10,3 +10,4 @@ learn CSS
 learn php
 learn php
 learn php
+<script>alert('hello')</stript>
