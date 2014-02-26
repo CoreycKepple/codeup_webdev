@@ -14,15 +14,16 @@ function newEntry($address_book,$filename){
 
 if (!empty($_POST)) {
 	if (empty($_POST['sendto'])) {
-		$error = 'You did not enter Recipients Name. Please re-enter information.';
+		$error = 'You did not enter Recipients Name. Please enter missing information.';
+
 	}elseif (empty($_POST['address'])) {
-		$error = 'You did not enter Recipients Address. Please re-enter information.';
+		$error = 'You did not enter Recipients Address. Please enter missing information.';
 	}elseif (empty($_POST['city'])) {
-		$error = 'You did not enter Recipients City. Please re-enter information.';
+		$error = 'You did not enter Recipients City. Please enter missing information.';
 	}elseif (empty($_POST['state'])) {
-		$error = 'You did not enter Recipients State. Please re-enter information.';
+		$error = 'You did not enter Recipients State. Please enter missing information.';
 	}elseif (empty($_POST['zip'])) {
-		$error = 'You did not enter Recipients Zip-Code. Please re-enter information.';
+		$error = 'You did not enter Recipients Zip-Code. Please enter missing information.';
 	}else {
 	array_push($address_book, $_POST);
 	$address_book = $address_book;
@@ -55,27 +56,27 @@ if (!empty($_POST)) {
 		<form method="POST" action="">
 			<p>
 				<label for="sendto">Recipients Name:</label>
-				<input id="sendto" name="sendto" type="text">
+				<input id="sendto" name="sendto" type="text" value='<?= (empty($error)) ? "" : $_POST["sendto"];?>'>
 			</p>
 			<p>
 				<label for="address">Recipients Address:</label>
-				<input id="address" name="address" type="text">
+				<input id="address" name="address" type="text" value='<?=  (empty($error)) ? "" : $_POST["address"];?>'>
 			</p>
 			<p>
 				<label for="city">Recipients City:</label>
-				<input id="city" name="city" type="text">
+				<input id="city" name="city" type="text" value='<?= (empty($error)) ? "" : $_POST["city"];?>'>
 			</p>
 			<p>
 				<label for="state">Recipients State:</label>
-				<input id="state" name="state" type="text">
+				<input id="state" name="state" type="text" value='<?= (empty($error)) ? "" : $_POST["state"];?>'>
 			</p>
 			<p>
 				<label for="zip">Recipients Zip-Code:</label>
-				<input id="zip" name="zip" type="text">
+				<input id="zip" name="zip" type="text" value='<?= (empty($error)) ? "" : $_POST["zip"];?>'>
 			</p>
 			<p>
 				<label for="phone">Recipients Phone Number:</label>
-				<input id="phone" name="phone" type="text">
+				<input id="phone" name="phone" type="text" value='<?= (empty($error)) ? "" : $_POST["phone"];?>'>
 			<p>
 				<input type='submit' value='Add New Entry'>
 			</p>
