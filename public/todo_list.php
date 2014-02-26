@@ -6,6 +6,7 @@ $arcfile = 'data/archive.txt';
 $arcsize = filesize($arcfile);
 $archive = [];
 $archiveitem = 0;	
+$error = '';
 
 
 function save_file($string,$filename) {
@@ -26,7 +27,6 @@ if ($filesize != 0) {
         array_push($list, $value);
      }
 }else {
-	echo "<p> You have Nothing TODO </p>";
 	$list = array();
 }
 
@@ -49,7 +49,7 @@ if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 			save_file($strfile,$filename);
 		}
 	}else {
-		echo "<p> File is not plain/text ~~ please upload a different file.</p>";
+		$error =  "<p> File is not plain/text ~~ please upload a different file.</p>";
 	}
 
 }
@@ -90,11 +90,15 @@ if (!empty($_POST['additem'])) {
 					<? endforeach; ?>
 				<? else : ?>
 					<h3><?= "You have nothing to do? Find something :";?></h3>
-					<p><?= "<a href='http://google.com'> :-)</a>";?></p>
+					<p><?= "<a href='http://google.com'>GOOGLE</a>";?></p>
 				<? endif; ?>
 			</ul>
 		</form>
 	<h2>Add items to list</h2>
+		<p>
+			<? if (!empty($error)) : ?>
+				<?= $error; ?>
+			<? endif; ?>
 		<form method="POST" enctype="multipart/form-data" action="">
 			<p>
 				<label for="additem">Item to add:</label>
