@@ -14,15 +14,15 @@ function newEntry($address_book,$filename){
 
 if (!empty($_POST)) {
 	if (empty($_POST['sendto'])) {
-		$error = 'You did not enter Recipients Name.';
+		$error = 'You did not enter Recipients Name. Please re-enter information.';
 	}elseif (empty($_POST['address'])) {
-		$error = 'You did not enter Recipients Address.';
+		$error = 'You did not enter Recipients Address. Please re-enter information.';
 	}elseif (empty($_POST['city'])) {
-		$error = 'You did not enter Recipients City.';
+		$error = 'You did not enter Recipients City. Please re-enter information.';
 	}elseif (empty($_POST['state'])) {
-		$error = 'You did not enter Recipients State.';
+		$error = 'You did not enter Recipients State. Please re-enter information.';
 	}elseif (empty($_POST['zip'])) {
-		$error = 'You did not enter Recipients Zip-Code.';
+		$error = 'You did not enter Recipients Zip-Code. Please re-enter information.';
 	}else {
 	array_push($address_book, $_POST);
 	$address_book = $address_book;
