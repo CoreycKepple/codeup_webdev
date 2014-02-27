@@ -39,6 +39,7 @@ if (!empty($_POST)) {
 		$error = 'You did not enter Recipients Zip-Code. Please enter missing information.';
 	}else {
 		array_push($address_book, $_POST);
+		saveFile($filename,$address_book);
 	}	
 }
 
@@ -50,7 +51,7 @@ if (isset($_GET['remove'])) {
 	exit(0);
 }
 
-saveFile($filename,$address_book);
+
 ?>
 <html>
 <head>
