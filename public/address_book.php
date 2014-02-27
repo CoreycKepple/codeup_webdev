@@ -1,30 +1,33 @@
 <?php
-var_dump($_GET);
-$filename = 'data/address_book.csv';
 $error = '';
-function openFile($filename){
-	$handle = fopen($filename, 'r');
-	if (!empty($filename) && filesize($filename) > 10) {
-		while(($data = fgetcsv($handle)) !== FALSE) {
-			$address_book[] = $data;
+class AddressStore {
+	public $filename = '';
+	function openFile(){
+		$handle = fopen($this->filename, 'r');
+		if (!empty($this->filename) && filesize($this->filename) > 10) {
+			while(($data = fgetcsv($handle)) !== FALSE) {
+				$address_book[] = $data;
+			}
+		}else {
+			$address_book=[];
 		}
-	}else {
-		$address_book=[];
+		fclose($handle);
+		return $address_book;
 	}
-	fclose($handle);
-	return $address_book;
+
+	function saveFile($address_book){
+		$handle = fopen($this->filename, 'w');
+		foreach ($address_book as $fields) {
+			if($fields != '');
+	    	fputcsv($handle, $fields);
+		}
+		fclose($handle);
+	}
 }
 
-function saveFile($filename,$address_book){
-	$handle = fopen($filename, 'w');
-	foreach ($address_book as $fields) {
-		if($fields != '');
-    	fputcsv($handle, $fields);
-	}
-fclose($handle);
-}
-
-$address_book = openFile($filename);
+$ad = new AddressStore();
+$ad->filename = 'data/address_book.csv';
+$address_book = $ad->openFile();
 
 if (!empty($_POST)) {
 	if (empty($_POST['sendto'])) {
@@ -39,14 +42,14 @@ if (!empty($_POST)) {
 		$error = 'You did not enter Recipients Zip-Code. Please enter missing information.';
 	}else {
 		array_push($address_book, $_POST);
-		saveFile($filename,$address_book);
+		$ad->saveFile($address_book);
 	}	
 }
 
 if (isset($_GET['remove'])) {
 	$key = intval($_GET['remove']);
 	unset($address_book[$key]);
-	saveFile($filename,$address_book);
+	$ad->saveFile($address_book);
 	header("Location: address_book.php");
 	exit(0);
 }
@@ -65,10 +68,10 @@ if (isset($_GET['remove'])) {
 				<? if (!empty($address_book)) : ?>
 						<? foreach ($address_book as $key => $fields) : ?>
 						<tr>
-							<?php foreach ($fields as $field): ?>
+							<? foreach ($fields as $field): ?>
 								<? $field = htmlspecialchars(strip_tags($field)); ?>
 								<td>||&mdash;<?=$field;?>&mdash;||</td>
-							<?php endforeach; ?>
+							<? endforeach; ?>
 						<td><?="<a href='?remove=$key'>Remove</a>"?></td></tr>
 						<? endforeach; ?>
 					<? else : ?>
