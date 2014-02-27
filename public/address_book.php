@@ -2,6 +2,9 @@
 $error = '';
 class AddressStore {
 	public $filename = '';
+	    function __construct($filename = ''){
+        $this->filename = $filename;
+    }
 	function openFile(){
 		$handle = fopen($this->filename, 'r');
 		if (!empty($this->filename) && filesize($this->filename) > 10) {
@@ -24,10 +27,10 @@ class AddressStore {
 		fclose($handle);
 	}
 }
-
-$ad = new AddressStore();
-$ad->filename = 'data/address_book.csv';
+$filename = 'data/address_book.csv';
+$ad = new AddressStore($filename);
 $address_book = $ad->openFile();
+
 
 if (!empty($_POST)) {
 	if (empty($_POST['sendto'])) {
@@ -110,5 +113,13 @@ if (isset($_GET['remove'])) {
 			<p>
 				<input type='submit' value='Add New Entry'>
 			</p>
+		</form>
+		<hr>
+		<form method="POST" enctype="multipart/form-data" action="">
+			<p>
+				<label for="add_file">Upload list:</label>
+				<input id="add_file" name="add_file" type="file">
+			</p>
+		</form>
 </body>
 </html>
