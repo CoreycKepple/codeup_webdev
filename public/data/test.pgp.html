@@ -1,0 +1,15 @@
+<?php
+
+$filename = 'address_book.csv';
+
+$handle = fopen($filename, 'r');
+
+$address_book = [];
+
+while(($data = fgetcsv($handle)) !== FALSE) {
+  $address_book[] = fgetcsv($handle);
+}
+
+fclose($handle);
+
+var_dump($address_book);
