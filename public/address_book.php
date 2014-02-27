@@ -62,7 +62,6 @@ if (isset($_GET['remove'])) {
 		<table>
 			<tr>
 				<th>Name:</th><th>Address:</th><th>City:</th><th>State:</th><th>Zip:</th><th>Phone (optional):</th>
-			<? if (empty($error)) : ?>
 				<? if (!empty($address_book)) : ?>
 						<? foreach ($address_book as $key => $fields) : ?>
 						<tr>
@@ -75,9 +74,9 @@ if (isset($_GET['remove'])) {
 					<? else : ?>
 						<tr><?= "Enter New Address" ?></tr>
 					<? endif; ?>
-			<? else : ?>
-				<tr><?= $error; ?></tr>
-			<? endif; ?> 
+				<? if (!empty($error)) : ?>
+					<tr><?=$error?></tr>
+				<? endif; ?>
 		</table>
 	<h2>Add New Address:</h2>
 	<hr>
