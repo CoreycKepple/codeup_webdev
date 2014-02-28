@@ -2,10 +2,12 @@
 $error = '';
 class AddressStore {
 	public $filename = '';
-	    function __construct($filename = ''){
+	
+	public function __construct($filename = ''){
         $this->filename = $filename;
     }
-	function openFile(){
+	
+	public function openFile(){
 		$handle = fopen($this->filename, 'r');
 		if (!empty($this->filename) && filesize($this->filename) > 10) {
 			while(($data = fgetcsv($handle)) !== FALSE) {
@@ -18,7 +20,7 @@ class AddressStore {
 		return $address_book;
 	}
 
-	function saveFile($address_book){
+	public function saveFile($address_book){
 		$handle = fopen($this->filename, 'w');
 		foreach ($address_book as $fields) {
 			if($fields != '');
@@ -30,6 +32,20 @@ class AddressStore {
 $filename = 'data/address_book.csv';
 $ad = new AddressStore($filename);
 $address_book = $ad->openFile();
+if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
+	if ($_FILES['add_file']['type'] == 'text/csv') {
+		$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+		$newfile = basename($_FILES['add_file']['name']);
+		$saved_filename = $upload_dir . $newfile;
+		move_uploaded_file($_FILES['add_file']['tmp_name'], $saved_filename);
+		$upload = new AddressStore($saved_filename);
+		$newarray = $upload->openfile();
+		$address_book = array_merge($address_book, $newarray);
+		$ad->saveFile($address_book);
+		header("Location: address_book.php");
+		exit(0);
+	}
+}
 
 
 if (!empty($_POST)) {
@@ -119,6 +135,9 @@ if (isset($_GET['remove'])) {
 			<p>
 				<label for="add_file">Upload list:</label>
 				<input id="add_file" name="add_file" type="file">
+			</p>
+			<p>
+				<input type='submit' value='Upload'>
 			</p>
 		</form>
 </body>
