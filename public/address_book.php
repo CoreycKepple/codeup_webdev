@@ -1,6 +1,6 @@
 <?php
 //Include Class to use within file
-include('classes/address_class.php');
+require_once('classes/address_class.php');
 
 //Set error to an empty string
 $error = '';
