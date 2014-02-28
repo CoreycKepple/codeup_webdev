@@ -1,37 +1,18 @@
 <?php
-$error = '';
-class AddressStore {
-	public $filename = '';
-	
-	public function __construct($filename = ''){
-        $this->filename = $filename;
-    }
-	
-	public function openFile(){
-		$handle = fopen($this->filename, 'r');
-		if (!empty($this->filename) && filesize($this->filename) > 10) {
-			while(($data = fgetcsv($handle)) !== FALSE) {
-				$address_book[] = $data;
-			}
-		}else {
-			$address_book=[];
-		}
-		fclose($handle);
-		return $address_book;
-	}
+//Include Class to use within file
+include('classes/address_class.php');
 
-	public function saveFile($address_book){
-		$handle = fopen($this->filename, 'w');
-		foreach ($address_book as $fields) {
-			if($fields != '');
-	    	fputcsv($handle, $fields);
-		}
-		fclose($handle);
-	}
-}
+//Set error to an empty string
+$error = '';
+
+//Set filename and create a new instance of the class
+//Open file - create array
 $filename = 'data/address_book.csv';
 $ad = new AddressStore($filename);
 $address_book = $ad->openFile();
+
+//Check to confirm file was uploaded
+//Add uploaded file to current array and then save array to file storage
 if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 	if ($_FILES['add_file']['type'] == 'text/csv') {
 		$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
@@ -47,7 +28,8 @@ if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 	}
 }
 
-
+//Validate if userinput filled in all required fields
+//Add userinput to addressbook array -- save to data storage
 if (!empty($_POST)) {
 	if (empty($_POST['sendto'])) {
 		$error = 'You did not enter Recipients Name. Please enter missing information.';
@@ -65,6 +47,9 @@ if (!empty($_POST)) {
 	}	
 }
 
+
+//Remove item from address_book array 
+//Save array to data storage
 if (isset($_GET['remove'])) {
 	$key = intval($_GET['remove']);
 	unset($address_book[$key]);
