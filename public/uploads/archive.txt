@@ -47,8 +47,3 @@ learn php
 learn HTML
 learn javascript
 learn HTML
-learn javascript
-learn HTML
-learn php
-learn CSS
-learn HTML

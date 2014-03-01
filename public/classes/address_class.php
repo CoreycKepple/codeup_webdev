@@ -1,30 +1,21 @@
 <?php 
-class AddressStore {
-	public $filename = '';
-	
-	public function __construct($filename = ''){
-        $this->filename = $filename;
-    }
-	
-	public function openFile(){
-		$handle = fopen($this->filename, 'r');
-		if (!empty($this->filename) && filesize($this->filename) > 10) {
-			while(($data = fgetcsv($handle)) !== FALSE) {
-				$address_book[] = $data;
-			}
-		}else {
-			$address_book=[];
-		}
-		fclose($handle);
-		return $address_book;
+
+require_once('filestore.php');
+
+class AddressDataStore extends Filestore {
+
+	function __constructor(){
+		
 	}
 
-	public function saveFile($address_book){
-		$handle = fopen($this->filename, 'w');
-		foreach ($address_book as $fields) {
-			if($fields != '');
-	    	fputcsv($handle, $fields);
-		}
-		fclose($handle);
-	}
+    function read_address_book()
+    {
+        return $this->read_csv();
+    }
+
+    function write_address_book($addresses_array) 
+    {
+        return $this->write_csv($addresses_array);
+    }
+
 }
