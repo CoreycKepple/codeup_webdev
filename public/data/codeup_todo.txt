@@ -3,6 +3,5 @@ learn javascript
 learn CSS
 go to store
 learn php
-learn javascript
 learn HTML
 learn CSS
