@@ -7,6 +7,7 @@ $arcsize = filesize($arcfile);
 $archive = [];
 $archiveitem = 0;	
 $error = '';
+var_dump($_POST);
 
 
 
