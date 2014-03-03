@@ -6,13 +6,13 @@ class TodoData extends Filestore {
 
 	public function read_todo() {
 
-		return $this->read_lines();
+		return $this->read();
 
 	}
 
 	public function save_todo($array) {
 
-		return $this->write_lines($array);
+		return $this->write($array);
 	}
 
 }

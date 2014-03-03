@@ -4,15 +4,34 @@ class Filestore {
 
     public $filename = '';
 
-    function __construct($filename = '') {
+    private $is_csv = FALSE;
+
+    public function __construct($filename = '') {
         if (!empty($filename)) {
        	 $this->filename = $filename;
-        }else {
-        	return;
-        }
+       		if (substr($filename, -3) == 'csv') {
+       	 		$this->is_csv = TRUE;
+       	 	}	
+   		 }
+   	}
+
+    public function read(){
+    	if ($this->is_csv == TRUE) {
+    		return $this->read_csv();
+    	}else {
+    		return $this->read_lines();
+    	}
     }
 
-    function read_lines() {
+    public function write($array){
+    	if ($this->is_csv == TRUE) {
+    		return $this->write_csv($array);
+    	}else {
+    		return $this->write_lines($array);
+    	}
+    }
+
+    private function read_lines() {
     	$items = [];
     	if (filesize($this->filename) > 0) {
 	    	$handle=fopen($this->filename, 'r');
@@ -25,14 +44,14 @@ class Filestore {
    		} return $items;
 	}
 
-    function write_lines($array) {
+    private function write_lines($array) {
     	$handle=fopen($this->filename, 'w');
         $string=implode("\n", $array);
         fwrite($handle, $string);
         fclose($handle);
     }
 
-    function read_csv()	{
+    private function read_csv()	{
     	$address_book = [];
 		if (filesize($this->filename) > 0) {
     	$handle = fopen($this->filename, 'r');
@@ -46,7 +65,7 @@ class Filestore {
 		return $address_book;
 	}
     
-    function write_csv($array) {
+    private function write_csv($array) {
     	$handle = fopen($this->filename, 'w');
 		foreach ($array as $fields) {
 			if($fields != '');
