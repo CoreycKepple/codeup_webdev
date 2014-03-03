@@ -48,13 +48,18 @@ if (isset($_GET['remove'])) {
 	header("Location: todo_list.php");
 	exit(0);
  }
-if (!empty($_POST['additem'])) {
-	$new = implode($_POST);
-	array_push($list, $new);
-	$tc->save_todo($list);
-	header("Location: todo_list.php");
-	exit(0);
+if (!empty($_POST)) {
+	if ((strlen($_POST['additem']) > 1 ) && (strlen($_POST['additem']) < 240)) {
+		$new = implode($_POST);
+		array_push($list, $new);
+		$tc->save_todo($list);
+		header("Location: todo_list.php");
+		exit(0);
+	}else{
+		throw new Exception('Item entered was Empty or Greater than 240 characters.');
+	}
 }
+
 ?>
 <!DOCTYPE HTML!>
 <html>
