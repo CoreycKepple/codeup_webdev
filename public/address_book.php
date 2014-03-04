@@ -32,35 +32,15 @@ if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 //Add userinput to addressbook array -- save to data storage
 if (!empty($_POST)) {
 	if (empty($_POST['sendto'])  || (strlen($_POST['sendto']) > 124)) {
-		if (empty($_POST['sendto'])) {
-			$error = 'You did not enter Recipients Name. Please enter missing information.';	
-		}elseif (strlen($_POST['sendto']) > 124) {
-			throw new Exception('Post was greater than 124 characters');
-		}
+		$error = $ad->validate($_POST['sendto']);
 	}elseif (empty($_POST['address']) || (strlen($_POST['address']) > 124)) {
-		if (empty($_POST['address'])) {
-		$error = 'You did not enter Recipients Address. Please enter missing information.';
-		}elseif (strlen($_POST['sendto']) > 124) {
-			throw new Exception('Post was greater than 124 characters');
-		}
+		$error = $ad->validate($_POST['address']);
 	}elseif (empty($_POST['city']) || (strlen($_POST['city']) > 124)) {
-		if (empty($_POST['city'])) {
-			$error = 'You did not enter Recipients City. Please enter missing information.';
-		}elseif (strlen($_POST['city']) > 124) {
-			throw new Exception('Post was greater than 124 characters');
-		}
+		$error = $ad->validate($_POST['city']);
 	}elseif (empty($_POST['state']) || (strlen($_POST['state']) > 124)) {
-		if (empty($_POST['state'])) {
-			$error = 'You did not enter Recipients State. Please enter missing information.';
-		}elseif (strlen($_POST['state']) > 124) {
-			throw new Exception('Post was greater than 124 characters');
-		}
-	}elseif (empty($_POST['zip'])  || (strlen($_POST['state']) > 124)) {
-		if (empty($_POST['zip'])) {
-			$error = 'You did not enter Recipients Zip-Code. Please enter missing information.';
-		}elseif (strlen($_POST['state']) > 124) {
-			throw new Exception('Post was greater than 124 characters');
-		}
+		$error = $ad->validate($_POST['state']);
+	}elseif (empty($_POST['zip'])  || (strlen($_POST['zip']) > 124)) {
+		$error = $ad->validate($_POST['zip']);
 	}else {
 		array_push($address_book, $_POST);
 		$ad->write_address_book($address_book);
@@ -111,7 +91,7 @@ if (isset($_GET['remove'])) {
 						<tr><?= "Enter New Address" ?></tr>
 					<? endif; ?>
 				<? if (!empty($error)) : ?>
-					<tr><?=$error?></tr>
+					<hr><tr><strong><?=$error?></strong></tr><hr>
 				<? endif; ?>
 		</table>
 	<h2>Add New Address:</h2>
