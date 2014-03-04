@@ -7,8 +7,6 @@ $arcsize = filesize($arcfile);
 $archive = [];
 $archiveitem = 0;	
 $error = '';
-var_dump($_POST);
-
 
 
 $list = $tc->read_todo();
@@ -57,7 +55,11 @@ if (!empty($_POST)) {
 		header("Location: todo_list.php");
 		exit(0);
 	}else{
-		throw new Exception('Item entered was Empty or Greater than 240 characters.');
+		try{
+		throw new InvalidInputException('Item entered was Empty or Greater than 240 characters.');
+		} catch (InvalidInputException $e) {
+			$error = "Error: " . $e->getMessage();
+		}
 	}
 }
 
@@ -94,7 +96,7 @@ if (!empty($_POST)) {
 	<h2>Add items to list</h2>
 		<p>
 			<? if (!empty($error)) : ?>
-				<?= $error; ?>
+				<hr><strong><?= $error; ?></strong><hr>
 			<? endif; ?>
 		<form method="POST" enctype="multipart/form-data" action="">
 			<p>
