@@ -32,28 +32,26 @@ var months = [
 	'December'
 	];
 
-// console.log(months);
-// todo:
-// Create the date corresponding to your birthday using the JavaScript Date object.
+// Get birthday information 
 var jsBirthday = new Date(1988,8,3);
 var newd = jsBirthday.getDate();
-// console.log(newd.toString());
 var newm = jsBirthday.getMonth();
-// console.log(newm.toString());
 var newy = jsBirthday.getFullYear();
-// console.log(newy);
+
+// Iterate through months array to determine month based on 0-11 index
 months.forEach(function(element,index,array){
 	if (index == newm) {
 		newm = element;
 	};
 });
 
-
 // todo:
 // Log your birthday in the format: January 1, 2014 using the JavaScript Date object.
 // See link below for methods needed:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#Getter
 console.log('Here is my birthday using vanilla js: '+newm+' '+newd+', '+newy);
+
+
 
 // create the date corresponding to your birthday using Moment.js.
 var momentBirthday = moment("9-3-1988","MM-DD-YYYY");
