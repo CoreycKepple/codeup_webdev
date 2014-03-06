@@ -1,51 +1,71 @@
 /* Box Model CSS */
 
-.box {
-	border: solid 1px black;
-	width: 172px;
-	height: 72px; 
-	margin-top:10px;
-	margin-bottom: 10px;
-	
+#header {
+	margin-bottom: 50px;
 }
 
-.box p{
-	width: 150px;
-	height: 50px;
+#ribbon {
+	position:fixed;
+	top: 20px;
+	right:20px;
+}
+
+.box {
+	border: solid 1px black;
+	width: 50px;
+	height: 50px; 
+	padding: 10px;
+	margin-top:10px;
+	margin-bottom: 10px;
 	color: white;
 	font-weight: 600;
-	padding-left: 10px;
+	position:relative;
+}
+
+.arrow {
+	position: absolute;
+	top: -35px;
+	right: -35px;
 }
 
 #red {
 	background-color: #F56565;
+	margin-bottom: 50px;
+	float:left;
 }
 
 #orange {
 	background-color: #E7A93C;
-	margin-left: 30px;
+	margin-left: 50px;
+	margin-bottom: 50px;
+	float:left;
 }
 
 #yellow {
 	background-color: #F0F04F;
-	margin-left: 60px;
+	margin-left: 50px;
+	margin-bottom: 50px;
+	float:left;
 
 }
 
 #green {
 	background-color: #48993D;
-	margin-left: 90px;
+	clear:left;
+	float:left;
 
 }
 
 #blue {
 	background-color: #474DD5;
-	margin-left: 120px;
+	margin-left: 50px;
+	float:left;
 
 }
 
-#purple {
+#violet {
 	background-color: #C34DDA;
-	margin-left: 150px;
+	margin-left: 50px;
+	float:left;
 
 }
