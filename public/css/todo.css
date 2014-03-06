@@ -11,14 +11,14 @@ h1,h2 {
 #body{
 	line-height:2em;
     margin:1em 2em;
-    border:6px outset #9a9;
+    border:4px outset #9a9;
     background:#efe;
-    -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
-    -moz-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
 	margin:25px;
 	width:350px;
 	position:relative;
 	left:405px;
+	bottom:40px;
 	font-family: 'Pompiere', cursive;
 	font-weight: 600;
 }
