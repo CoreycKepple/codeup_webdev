@@ -58,3 +58,7 @@ learn CSS
 
 Hello
 learn HTML
+learn javascript
+hello
+learn php
+go to school

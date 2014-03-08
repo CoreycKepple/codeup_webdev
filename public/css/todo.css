@@ -15,17 +15,19 @@ h1,h2 {
     background:#efe;
     box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
     padding-left:25px;
-	margin:25px;
-	width:350px;
-	position:relative;
-	left:400px;
-	bottom:40px;
+	width:35%;
+	position:absolute;
+	top: 200px;
+	right: 400px;
+	left: 400px;
 	font-family: 'Pompiere', cursive;
 	font-weight: 600;
 }
 
 #back {
-	background-image: url(/img/bg2.png);
+	background-image: url(/img/background.png);
+	position:relative;
+	margin-bottom: 500px;
 }
 
 ul{

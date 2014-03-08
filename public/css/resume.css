@@ -1,0 +1,44 @@
+/* Resume css additions */
+
+.box {
+	color: #FFFFFF;
+	position:absolute;
+	top:70px;
+	right:400px;
+	left:400px;
+	border: 1px solid black;
+	padding: 10px;
+	background-color: white;
+	-webkit-box-shadow: 0px 0px 12px #D2D2D8; 
+	-moz-box-shadow: 0px 1px 6px #D2D2D8; 
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 7px; 
+	border-radius: 7px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#4247CF), to(#000)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #4247CF,  #000); /* for firefox 3.6+ */
+    margin-bottom: 20px;
+}
+
+body {
+	background-image: url('/img/background.png');
+}
+
+#name {
+	text-shadow: 2px 2px 15px #000;
+	
+}
+
+#name p{
+	float:left;
+}
+
+#navvy{
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#A6ACCA)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #FFF,  #A6ACCA); /* for firefox 3.6+ */
+    border:.5px solid black;
+    text-shadow: 1px 1px 1px #000;
+}
+
+h2 {
+	text-decoration: underline;
+}

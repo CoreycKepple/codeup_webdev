@@ -5,9 +5,13 @@
 }
 
 #ribbon {
-	position:fixed;
-	top: 20px;
-	right:20px;
+	position:absolute;
+	top: 0px;
+	right:0px;
+}
+
+body {
+	margin-bottom: 500px;
 }
 
 .box {
@@ -20,7 +24,11 @@
 	color: white;
 	font-weight: 600;
 	position:relative;
+	text-shadow: 3px 3px 5px #000;
+	box-shadow: 12px 12px 10px #555;
 }
+
+
 
 .arrow {
 	position: absolute;
@@ -34,11 +42,18 @@
 	float:left;
 }
 
+#red:hover {
+	box-shadow: 12px 12px 29px #F56565;
+}
+
 #orange {
 	background-color: #E7A93C;
 	margin-left: 50px;
 	margin-bottom: 50px;
 	float:left;
+}
+#orange:hover {
+	box-shadow: 12px 12px 29px #E7A93C;
 }
 
 #yellow {
@@ -49,12 +64,21 @@
 
 }
 
+#yellow:hover {
+	box-shadow: 12px 12px 29px #F0F04F;
+}
+
 #green {
 	background-color: #48993D;
 	clear:left;
 	float:left;
 
 }
+
+#green:hover {
+	box-shadow: 12px 12px 29px #48993D;
+}
+
 
 #blue {
 	background-color: #474DD5;
@@ -63,9 +87,18 @@
 
 }
 
+#blue:hover {
+	box-shadow: 12px 12px 29px #474DD5;
+}
+
+
 #violet {
 	background-color: #C34DDA;
 	margin-left: 50px;
 	float:left;
 
+}
+
+#violet:hover {
+	box-shadow: 12px 12px 29px #C34DDA;
 }
