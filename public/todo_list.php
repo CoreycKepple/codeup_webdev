@@ -1,15 +1,20 @@
 <?php
 require_once('classes/todo_class.php');
-$filename = 'data/codeup_todo.txt';
-$tc = new TodoData($filename);
 $arcfile = 'data/archive.txt';
+$filename = 'data/codeup_todo.txt';
 $arcsize = filesize($arcfile);
+$tc = new TodoData($filename);
+
+//Establishing global variables
 $archive = [];
 $archiveitem = 0;	
 $error = '';
 
-
+//Create new list from saved file
 $list = $tc->read_todo();
+
+//Check user upload determine if file is correct type and holds data
+//Allow user to overwrite current list or add new file to current list
 
 if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 	if ($_FILES['add_file']['type'] == 'text/plain') {
@@ -34,6 +39,9 @@ if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
 	}
 
 }
+
+//Allow user to remove individual tasks from list
+
 if (isset($_GET['remove'])) {
 	$key = $_GET['remove'];
 	$archiveitem = ($list[$key]);
@@ -47,6 +55,10 @@ if (isset($_GET['remove'])) {
 	header("Location: todo_list.php");
 	exit(0);
  }
+
+//Allow user to post new items to list
+//Check to ensure post is small than 240 characters
+
 if (!empty($_POST)) {
 	if ((strlen($_POST['additem']) > 1 ) && (strlen($_POST['additem']) < 240)) {
 		$new = implode($_POST);
