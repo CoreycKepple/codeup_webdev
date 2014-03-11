@@ -1,0 +1,104 @@
+/* Box Model CSS */
+
+#header {
+	margin-bottom: 50px;
+}
+
+#ribbon {
+	position:absolute;
+	top: 0px;
+	right:0px;
+}
+
+body {
+	margin-bottom: 500px;
+}
+
+.box {
+	border: solid 1px black;
+	width: 50px;
+	height: 50px; 
+	padding: 10px;
+	margin-top:10px;
+	margin-bottom: 10px;
+	color: white;
+	font-weight: 600;
+	position:relative;
+	text-shadow: 3px 3px 5px #000;
+	box-shadow: 12px 12px 10px #555;
+}
+
+
+
+.arrow {
+	position: absolute;
+	top: -35px;
+	right: -35px;
+}
+
+#red {
+	background-color: #F56565;
+	margin-bottom: 50px;
+	float:left;
+}
+
+#red:hover {
+	box-shadow: 12px 12px 29px #F56565;
+}
+
+#orange {
+	background-color: #E7A93C;
+	margin-left: 50px;
+	margin-bottom: 50px;
+	float:left;
+}
+#orange:hover {
+	box-shadow: 12px 12px 29px #E7A93C;
+}
+
+#yellow {
+	background-color: #F0F04F;
+	margin-left: 50px;
+	margin-bottom: 50px;
+	float:left;
+
+}
+
+#yellow:hover {
+	box-shadow: 12px 12px 29px #F0F04F;
+}
+
+#green {
+	background-color: #48993D;
+	clear:left;
+	float:left;
+
+}
+
+#green:hover {
+	box-shadow: 12px 12px 29px #48993D;
+}
+
+
+#blue {
+	background-color: #474DD5;
+	margin-left: 50px;
+	float:left;
+
+}
+
+#blue:hover {
+	box-shadow: 12px 12px 29px #474DD5;
+}
+
+
+#violet {
+	background-color: #C34DDA;
+	margin-left: 50px;
+	float:left;
+
+}
+
+#violet:hover {
+	box-shadow: 12px 12px 29px #C34DDA;
+}
