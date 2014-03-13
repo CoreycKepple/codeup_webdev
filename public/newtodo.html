@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <title>CCK | Resume</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700');" rel='font'>
+        <link href='/css/basis.css' rel='stylesheet'>  
+    </head>
+      <body>
+        
+        <div class="wrapper" >
+    <div class="box">
+        <div class="row">
+          
+            <!-- sidebar -->
+            <div class="column col-sm-3" id="sidebar">
+                <a class="logo" href="#about">CK</a>
+                <ul class="nav" id="links">
+                    <li class="active"><a href="#resume">Resume</a>
+                    </li>
+                    <li><a href="#portfolio">Portfolio</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /sidebar -->
+          
+            <!-- main -->
+            <div class="column col-sm-9" id="main">
+                <div class="padding">
+                    <div class="full col-sm-9">
+                        <!-- content -->
+                    <h1>TODO list:</h1>
+                    <form method ="GET" action ="">
+                      <ul>  
+                        <?if(!empty($list)) : ?>
+                          <?foreach ($list as $key => $item) : ?>
+                          <? $item = htmlspecialchars(strip_tags($item)); ?>
+                          <li><?= "{$item} | <a href='?remove={$key}' name='remove' id='remove'>Remove Item</a>"; ?></li>
+                          <? endforeach; ?>
+                        <? else : ?>
+                          <h3><?= "You have nothing to do? Find something :";?></h3>
+                          <p><?= "<a href='http://google.com'>GOOGLE</a>";?></p>
+                        <? endif; ?>
+                      </ul>
+                    </form>
+                  <div>
+                  <h2>Add items to list</h2>
+                    <? if (!empty($error)) : ?>
+                      <hr><strong><?= $error; ?></strong><hr>
+                    <? endif; ?>
+                  <form method="POST" enctype="multipart/form-data" action="">
+                      <p>
+                        <label for="additem">Item to add:</label>
+                        <input id="additem" name="additem" type="text" placeholder="Enter new TODO item">
+                      </p>
+                      <p>
+                        <label for="add_file">Upload list:</label>
+                        <input id="add_file" name="add_file" type="file">
+                      </p>
+                      <p>
+                        <label for="overwrite">Overwrite current list with uploaded list?:</label>
+                        <input id="overwrite" name="overwrite" type="checkbox">
+                      </p>
+                      <p class='add'>
+                        <input type="submit" value="Add">
+                      </p>
+                  </form>
+                  <h2>View archive of completed Items:</h2>
+                  <p class='add'>
+                    <a href="/data/archive.txt">Completed Items</a>
+                  </p>
+                  </div>   
+                       
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+          
+        </div>
+    </div>
+</div>        
+      
+        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        
+    </body>
+</html>

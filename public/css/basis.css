@@ -9,6 +9,21 @@ a {
   color:#222222;
 }
 
+
+.mid{
+  padding-left: 200px;
+  padding-right: 200px;
+}
+.mid1{
+  padding-left: 130px;
+  padding-right: 100px;
+}
+
+#upload{
+  border: 1px solid black;
+  width:330px;
+  padding: 10px;
+}
 .wrapper, .row {
    height: 100%;
    margin-left:0;
@@ -51,13 +66,29 @@ a {
 	margin-top:32px;
 }
 
+.padbot {
+  padding-bottom: 25px;
+}
+.padtop {
+  padding-top: 25px;
+}
+
+#remove {
+  color:#4486CE;
+}
+
 #main {
-    background-image:url('/img/blue.png');
+    background-color: #FFFFFF;
 }
 #main .img-circle {
   margin-top:18px;
   height:70px;
   width:70px;
+}
+
+.img-block{
+  height:140px;
+  width:110px;
 }
 
 #sidebar, #sidebar a {
@@ -102,6 +133,15 @@ a {
     height:80px;
     width:90px;
     margin-bottom:30px;
+  }
+  .badge {
+   width: 28px;
+   height:19px;
+   float: left;
+  }
+  .mid{
+  padding-left: 0px;
+  padding-right: 0px;
   }
 }
 
