@@ -11,18 +11,23 @@ a {
 
 
 .mid{
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 190px;
+  padding-right: 190px;
 }
 .mid1{
   padding-left: 130px;
   padding-right: 100px;
 }
 
+.margleft{
+  margin-left: 25px;
+}
+
 #upload{
   border: 1px solid black;
   width:330px;
   padding: 10px;
+  margin-left: 25px;
 }
 .wrapper, .row {
    height: 100%;
@@ -67,13 +72,13 @@ a {
 }
 
 .padbot {
-  padding-bottom: 25px;
+  padding-bottom: 18px;
 }
 .padtop {
   padding-top: 25px;
 }
 
-#remove {
+.linker {
   color:#4486CE;
 }
 
@@ -84,6 +89,11 @@ a {
   margin-top:18px;
   height:70px;
   width:70px;
+}
+
+.thumbnail{
+  height:200px;
+  width:150px;
 }
 
 .img-block{

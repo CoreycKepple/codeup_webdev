@@ -8,6 +8,11 @@ h1,h2 {
 	text-decoration: underline;
 }
 
+.thumbnail{
+	height:140px;
+    width:110px;
+}
+
 #body{
 	line-height:2em;
     margin:1em 2em;

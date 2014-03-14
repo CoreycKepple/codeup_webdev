@@ -117,7 +117,7 @@ if (!empty($_POST)) {
                             <?if(!empty($list)) : ?>
                               <?foreach ($list as $key => $item) : ?>
                               <? $item = htmlspecialchars(strip_tags($item)); ?>
-                              <li><?= "{$item} | <a href='?remove={$key}' name='remove' id='remove'>Remove Item</a>"; ?></li>
+                              <li><?= "{$item} | <a href='?remove={$key}' name='remove' class='linker'>Remove Item</a>"; ?></li>
                               <? endforeach; ?>
                             <? else : ?>
                               <h3><?= "You have nothing to do? Find something :";?></h3>
@@ -126,16 +126,18 @@ if (!empty($_POST)) {
                           </ul>
                         </form>
                       
-                        <h2 class='padbot'>Add items to list</h2>
+                        <h2>Add items to list</h2>
                           <? if (!empty($error)) : ?>
                             <hr><strong><?= $error; ?></strong><hr>
                           <? endif; ?>
-                        <form method="POST" enctype="multipart/form-data" action="">
-                            <p>
+                        <form method="POST" action="">
+                            <p class='margleft padbot'>
                               <label for="additem">Item to add:</label>
                               <input id="additem" name="additem" type="text" placeholder="Enter new TODO item">
                               <input type="submit" value="Add">
                             </p>
+                        </form>
+                        <form method="POST" enctype="multipart/form-data" action="">
                             <div id='upload'>
                               <p class='padtop'>
                                 <label for="add_file">Upload list:</label>
@@ -152,7 +154,7 @@ if (!empty($_POST)) {
                         </form>
                         <h2>View archive of completed Items:</h2>
                         <p class='mid1'>
-                          <a href="/data/archive.txt">Completed Items</a>
+                          <a href="/data/archive.txt" class='linker'>Completed Items</a>
                         </p>
                       </div>   
                        
