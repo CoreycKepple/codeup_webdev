@@ -1,79 +1,11 @@
 <?php
-require_once('classes/todo_class.php');
-$arcfile = 'data/archive.txt';
-$filename = 'data/codeup_todo.txt';
-$arcsize = filesize($arcfile);
-$tc = new TodoData($filename);
+require_once('classes/new_todoclass.php');
 
 //Establishing global variables
-$archive = [];
-$archiveitem = 0; 
 $error = '';
+$key = '';
 
-//Create new list from saved file
-$list = $tc->read_todo();
-
-//Check user upload determine if file is correct type and holds data
-//Allow user to overwrite current list or add new file to current list
-
-if (count($_FILES)>0 && $_FILES['add_file']['error']==0) {
-  if ($_FILES['add_file']['type'] == 'text/plain') {
-    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
-    $newfile = basename($_FILES['add_file']['name']);
-    $saved_filename = $upload_dir . $newfile;
-    move_uploaded_file($_FILES['add_file']['tmp_name'], $saved_filename);
-    $upload = new TodoData($saved_filename);
-    $newlist = $upload->read_todo();
-    if ($_POST['overwrite'] == TRUE) {
-      $tc->save_todo($newlist);
-      header("Location: newtodo.php");
-      exit(0);  
-    }else {
-      $list = array_merge($list,$newlist);
-      $tc->save_todo($list);
-      header("Location: newtodo.php");
-      exit(0);
-    }
-  }else {
-    $error =  "<p> File is not plain/text ~~ please upload a different file.</p>";
-  }
-
-}
-
-//Allow user to remove individual tasks from list
-
-if (isset($_GET['remove'])) {
-  $key = $_GET['remove'];
-  $archiveitem = ($list[$key]);
-  unset($list[$key]);
-  var_dump($list);
-  $tc->save_todo($list);
-  $archandle = fopen($arcfile, 'a');
-  $addarc = PHP_EOL.$archiveitem;
-  fwrite($archandle, $addarc);
-  fclose($archandle);
-  header("Location: newtodo.php");
-  exit(0);
- }
-
-//Allow user to post new items to list
-//Check to ensure post is small than 240 characters
-
-if (!empty($_POST)) {
-  if ((strlen($_POST['additem']) > 1 ) && (strlen($_POST['additem']) < 240)) {
-    $new = implode($_POST);
-    array_push($list, $new);
-    $tc->save_todo($list);
-    header("Location: newtodo.php");
-    exit(0);
-  }else{
-    try{
-    throw new InvalidInputException('Item entered was Empty or Greater than 240 characters.');
-    } catch (InvalidInputException $e) {
-      $error = "Error: " . $e->getMessage();
-    }
-  }
-}
+// var_dump($_POST);
 
 ?>
 
@@ -86,6 +18,9 @@ if (!empty($_POST)) {
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700');" rel='font'>
         <link href='/css/basis.css' rel='stylesheet'>  
+
+        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     </head>
       <body>
         
@@ -112,50 +47,27 @@ if (!empty($_POST)) {
                         <!-- content -->
                       <div class="mid">    
                         <h1>TODO list:</h1>
-                        <form method ="GET" action ="">
                           <ul class='padbot'>  
-                            <?if(!empty($list)) : ?>
-                              <?foreach ($list as $key => $item) : ?>
-                              <? $item = htmlspecialchars(strip_tags($item)); ?>
-                              <li><?= "{$item} | <a href='?remove={$key}' name='remove' class='linker'>Remove Item</a>"; ?></li>
-                              <? endforeach; ?>
+                            <?if(isset($list)) : ?>
+                              <?  while ($row = $list->fetch_assoc()) : ?>
+                                  <li><?= $row['item']; ?> | <a href="<?= $row['id']; ?>" class="removeItem">Remove</a></li>
+                              <? endwhile; ?>
                             <? else : ?>
                               <h3><?= "You have nothing to do? Find something :";?></h3>
                               <p><?= "<a href='http://google.com'>GOOGLE</a>";?></p>
                             <? endif; ?>
                           </ul>
-                        </form>
-                      
                         <h2>Add items to list</h2>
                           <? if (!empty($error)) : ?>
                             <hr><strong><?= $error; ?></strong><hr>
                           <? endif; ?>
                         <form method="POST" action="">
-                            <p class='margleft padbot'>
+                            <p class='margleft padtop'>
                               <label for="additem">Item to add:</label>
                               <input id="additem" name="additem" type="text" placeholder="Enter new TODO item">
                               <input type="submit" value="Add">
                             </p>
                         </form>
-                        <form method="POST" enctype="multipart/form-data" action="">
-                            <div id='upload'>
-                              <p class='padtop'>
-                                <label for="add_file">Upload list:</label>
-                                <input id="add_file" name="add_file" type="file">
-                              </p>
-                              <p>
-                                <label for="overwrite">Overwrite current list with uploaded list?:</label>
-                                <input id="overwrite" name="overwrite" type="checkbox">
-                              </p>
-                              <p class='mid1'>
-                                <input type="submit" value="Add">
-                              </p>
-                            </div>
-                        </form>
-                        <h2>View archive of completed Items:</h2>
-                        <p class='mid1'>
-                          <a href="/data/archive.txt" class='linker'>Completed Items</a>
-                        </p>
                       </div>   
                        
                     </div><!-- /col-9 -->
@@ -165,10 +77,28 @@ if (!empty($_POST)) {
           
         </div>
     </div>
-</div>        
+</div>   
+        <form id="deleteItem" method="POST" action="newtodo.php">
+          <input type="hidden" name="remove" id="remove">
+        </form>
+
+        <script>
+          var form = $('#deleteItem');
+          var id;
+
+          $('.removeItem').click(function(evt){
+              evt.preventDefault();
+
+              id = $(this).attr('href');
+
+              console.log(id);
+
+              $('#remove').val(id);
+              form.submit();
+          });   
+        </script> 
       
-        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        
         
     </body>
 </html>

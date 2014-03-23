@@ -128,7 +128,7 @@ if (!empty($_POST)) {
 					<?if(!empty($list)) : ?>
 						<?foreach ($list as $key => $item) : ?>
 						<? $item = htmlspecialchars(strip_tags($item)); ?>
-						<li><?=	"{$item} | <a href='?remove={$key}' name='remove' id='remove'>Remove Item</a>"; ?></li>
+						<li><?=	"{$item}"; ?></li>
 						<? endforeach; ?>
 					<? else : ?>
 						<h3><?= "You have nothing to do? Find something :";?></h3>
