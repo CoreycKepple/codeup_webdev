@@ -2,33 +2,63 @@
 
 height: 500px;
 width: 500px;
-border: 2px solid black;
-float:left;
+cursor:url('/img/whack/cursor.png'), auto;
 
 }
 
+
 #scorebox {
-	float:left;
+
 	height: 50px;
 	width: 150px;
-	border: 2px solid red;
+	border: 3px solid #FFF;
+	background-color: #9c030b;
 	margin-bottom: 5px;
 }
 
+#startbutton {
+	color: #041b42;
+	font-family: 'Oldenburg', cursive;
+	font-weight: 900;
+	font-size: 2em;
+	height: 50px;
+	width: 150px;
+	border: 3px solid #FFF;
+	background-color: #9c030b;
+	margin-top: 25px;
+}
+
+#b {
+	
+	height: 350px;
+	width: 205px;
+	margin-right: 60px;
+	margin-top: 20px;
+
+}
+
 #scoretext {
-	color: red;
-	font-weight: 800;
-	padding: 13px;
+	margin-top: 5px;
+	color: #041b42;
+	font-family: 'Oldenburg', cursive;
+	font-weight: 900;
+	font-size: 1em;
+	padding: 2px;
+}
+
+#main {
+	background-color: #041b42;
 }
 
 .boxes {
 	height: 33.333%;
 	width: 33.334%;
-	border: 1px solid blue;
+	border: 1px solid #FFF;
 	float:left;
 }
 
 .boxes > img {
-	padding: 5px;
+	padding-top: 10px;
+	padding-left: 10px;
 	display:none;
 }
