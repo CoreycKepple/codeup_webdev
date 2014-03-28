@@ -13,11 +13,11 @@
 				<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 				<script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 		</head>
-			<body>
+		<body>
 				
-				<div class="wrapper" >
-		<div class="box">
-				<div class="row">
+			<div class="wrapper" >
+				<div class="box">
+					<div class="row">
 					
 						<!-- sidebar -->
 						<div class="column col-sm-3" id="sidebar">
@@ -37,8 +37,11 @@
 										<div class="full col-sm-9">
 												<!-- content -->
 											<div class='row'>
-												<div id='scorebox' class='col-sm-12'>
+												<div class='scorebox col-sm-4'>
 													<p id='scoretext'>Score: <span> </span></p>
+												</div>
+												<div class='scorebox col-sm-4 col-sm-offset-7'>
+													<p id='hightext'>High-Score: <span> </span></p>
 												</div>
 											</div>
 												<div class='row'>
@@ -48,6 +51,7 @@
 															<p class='text-center'>Start<p>
 														</div>
 													</div> 
+													
 													
 													<div id='gamebox' class='col-sm-8'> 
 														<div class='boxes'>
@@ -90,27 +94,51 @@
 		</div>
 </div>  
 	<script>
+	$(document).ready(function() {
 
-	var boxArray = $('.boxes');
-	var score = 0;
+		var boxArray = $('.boxes');
+		var score = 0;
+		var highscore = 0;
 
-	function boxchange(){
-		$('.boxes').children().fadeOut(500);
-		var random = Math.floor(Math.random() * boxArray.length);
-		$(boxArray[random]).children().fadeIn(500);
-	}
+		function boxchange(){
+			$('.boxes').children().fadeOut(250);
+			var random = Math.floor(Math.random() * boxArray.length);
+			$(boxArray[random]).children().fadeIn(250);
+		}
 
-	$('#startbutton').click(function(){
-		window.setInterval(boxchange, 1500);
+		function endGame(){
+			clearInterval(game);
+			$('.pic').hide("explode");
+			score = 0;
+			$('#scoretext').children().html(score);
+			$('#startbutton').removeAttr('style');
+			audioElement.pause();
+
+		}
+
+		
+		
+		$('#startbutton').click(function(){
+			$('#startbutton').css('box-shadow','0px 0px 15px #F00');
+			game = window.setInterval(boxchange, 750);
+			window.setInterval(endGame, 30000);
+			var audioElement = document.createElement('audio');
+       		audioElement.setAttribute('src', 'http://umamimart.com/wp-content/uploads/2010/08/TakeMeOutToTheBallgame_64kb-2.mp3');
+       		audioElement.setAttribute('autoplay', 'autoplay');
+       		audioElement.addEventListener("load", function() {audioElement.play();}, true);
+       		audioElement.play();
+		});
+
+		$('.boxes').children().click(function() {
+			$('.pic').hide("explode");
+			score = score + 1;
+			$('#scoretext').children().html(score);
+			if (score > highscore) {
+				highscore = score;
+			};
+			$('#hightext').children().html(highscore);
+		});
 	});
-
-	$('.boxes').children().click(function() {
-		console.log('+1');
-		$('.pic').hide("explode");
-		score = score + 1;
-		$('#scoretext').children().html(score);
-	});
-
 
 	</script> 
 				

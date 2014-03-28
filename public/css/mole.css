@@ -1,13 +1,18 @@
 #gamebox {
-
 height: 500px;
 width: 500px;
-cursor:url('/img/whack/cursor.png'), auto;
 
 }
 
+#gameover {
+	position:relative;
+	width:350px;
+	height:200px;
+	border: 2px solid red;
+}
 
-#scorebox {
+
+.scorebox {
 
 	height: 50px;
 	width: 150px;
@@ -28,6 +33,11 @@ cursor:url('/img/whack/cursor.png'), auto;
 	margin-top: 25px;
 }
 
+#startbutton:hover {
+	box-shadow: 0px 0px 15px #fff;
+
+}
+
 #b {
 	
 	height: 350px;
@@ -46,8 +56,18 @@ cursor:url('/img/whack/cursor.png'), auto;
 	padding: 2px;
 }
 
+#hightext {
+	margin-top: 5px;
+	color: #041b42;
+	font-family: 'Oldenburg', cursive;
+	font-weight: 900;
+	font-size: 1em;
+	padding: 1px;
+}
+
 #main {
 	background-color: #041b42;
+	cursor:url('/img/whack/final.png') 25 25, auto;
 }
 
 .boxes {
